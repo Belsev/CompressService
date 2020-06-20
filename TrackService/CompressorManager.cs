@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -15,12 +16,11 @@ namespace TrackService
         {
             try
             {
-                var myDocsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                directoryName = File.ReadAllText(Path.Combine(myDocsFolderPath, "TrackService\\TrackServiceFolder.txt"));
+                directoryName = ConfigurationManager.AppSettings["TrackFolderName"];
             }
             catch
             {
-                throw new Exception("Невозможно прочитать файл настроек");
+                throw new Exception("Config file error");
             }
         }
 
